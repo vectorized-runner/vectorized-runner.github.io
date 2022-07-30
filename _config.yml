@@ -1,13 +1,14 @@
 title: "Bartu's Blog"
 author: "Bartu Baş"
-description: "WHAT IS THIS?" # This will show up in places like twitter, linkedin, etc, if you share your sites url as a post.
+description: "Bartu's coding adventures" # This will show up in places like twitter, linkedin, etc, if you share your sites url as a post.
 
 # Email / Social media user names used by the minima theme:
 # All of these are optional and can be removed or commented out
 email: "bartubas99@gmail.com"
 #twitter_username: "twitteruser"
 github_username: "vectorized-runner"
-linkedin_username: "linkedinuser"
+linkedin_username: "bartubas"
+gitlab_username: "vectorized_runner"
 #facebook_username: username
 #flickr_username: username
 #instagram_username: username
