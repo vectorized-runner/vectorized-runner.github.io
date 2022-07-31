@@ -365,7 +365,7 @@ void AddToList(ref StackOnlyList<int> list)
 }
 ```
 
-Rest of the implementation is ordinary. Also I didn't provide the whole IList interface, but you can extend it yourself! You can get the full source code from here: [StackOnlyList](github.com/vectorized-runner/StackOnlyList)
+Rest of the implementation is ordinary. Also I didn't provide the whole IList interface, but you can extend it yourself! You can get the full source code from here: [StackOnlyList](https://github.com/vectorized-runner/StackOnlyList/blob/main/StackOnlyList/StackOnlyList.cs)
 
 # Summary
 
