@@ -36,7 +36,7 @@ kramdown:
     css_class: 'highlight'
 
 
-theme: "minima"
+theme: jekyll-theme-minimal
 
 rss: rss
     
