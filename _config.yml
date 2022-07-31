@@ -29,7 +29,7 @@ kramdown:
   syntax_highlighter: rouge
 
 
-#theme: "minima"
+theme: "minima"
 
 rss: rss
     
