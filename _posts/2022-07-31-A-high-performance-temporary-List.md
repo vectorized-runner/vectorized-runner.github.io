@@ -20,7 +20,7 @@ Let's start with the signature and fields of our list:
 ```csharp
 public ref struct StackOnlyList<T> where T : IEquatable<T>
 {
-    // These fields are internal because they're used in unit tests
+    // These fields are internal because they are used in unit tests
     internal Span<T> Span;
     internal T[] ArrayFromPool;
     public int Capacity { get; private set; }
@@ -56,7 +56,7 @@ We can use the constructor like this:
 var list = new StackOnlyList<int>(stackalloc int[32]);
 ```
 
-You need to be **very careful ** when using this constructor though:
+You need to be **very careful** when using this constructor though:
 
 ```cs
 // This method may crash your program depending on the 'size' parameter and the size of the generic type T. If the size is a parameter you shouldn't use this constructor!
