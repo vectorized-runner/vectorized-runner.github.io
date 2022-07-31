@@ -34,7 +34,7 @@ The list is a [ref struct]( https://docs.microsoft.com/en-us/dotnet/csharp/langu
 
 `ArrayFromPool` field is to store arrays returned from the shared memory, we'll eventually return the array so we keep a reference to it.
 
-Notice that I've forced generic type *T* to implement the `IEquatable` interface. It's an extra optimization when working with structs, as using the default `Equals` implementation **causes boxing for structs.**
+Notice that I've forced generic type *T* to implement the `IEquatable` interface. It's an extra optimization when working with structs, as using the default `Equals` implementation **causes boxing for structs** (it calls the ```ValueType.Equals(object? obj)``` method). You can read more here: [Preventing boxing with structs using generics](https://stackoverflow.com/questions/3032750/structs-interfaces-and-boxing/3033357#3033357) 
 
 Here's the the constructor for stack memory:
 
