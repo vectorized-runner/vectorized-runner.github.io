@@ -17,7 +17,10 @@ gitlab_username: "vectorized_runner"
 #youtube_username: username
 #googleplus_username: +username
 
-
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
 #########################################################################################
 ######### Nothing below needs to be changed (unless you know what you're doing) #########
@@ -42,5 +45,3 @@ defaults:
       type: post
     values:
       tags: Other
-
-markdown: GFM
