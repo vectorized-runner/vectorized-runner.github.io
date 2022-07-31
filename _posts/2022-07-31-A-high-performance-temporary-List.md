@@ -213,6 +213,22 @@ If the current capacity is zero, it's a simpler path. If capacity is greater tha
 
 Also we're passing the parameter with [in](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/in-parameter-modifier) keyword, which passes the argument as read-only reference. This is another optimization for working with big structs, we don't want them copied.
 
+{% highlight csharp %}
+
+public ref T this[int index]
+{
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    get
+    {
+        CheckIndexGreaterOrEqualToCountAndThrow(index);
+        return ref Span[index];
+    }
+}
+
+{% endhighlight %}
+
+
+
 See indexing to our list:
 
 ```cs
@@ -244,7 +260,7 @@ void RefReturnExample()
 
     // A 4x4 matrix has 16 float fields, total of 64 bytes, we don't want to copy it!
 	ref var matrix = ref list[0];
-   	// You can also have read-only reference
+    // You can also have read-only reference
     ref readonly var readonlyMatrix = ref list[0];
     
   	// We can also copy it, but the performance gains are gone!
