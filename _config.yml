@@ -31,23 +31,23 @@ kramdown:
 #########################################################################################
 ######### Nothing below needs to be changed (unless you know what you're doing) #########
 #########################################################################################
-theme: "minima"
+#theme: "minima"
 
-rss: rss
+#rss: rss
 
 #markdown:kramdown
     
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
+#plugins:
+#  - jekyll-feed
+#  - jekyll-sitemap
 
-titles_from_headings:
-  strip_title: true
-  collections: true
+#titles_from_headings:
+#  strip_title: true
+#  collections: true
 
-defaults:
-  - scope:
-      path: ""
-      type: post
-    values:
-      tags: Other
+#defaults:
+#  - scope:
+#      path: ""
+#      type: post
+#    values:
+#      tags: Other
