@@ -23,10 +23,17 @@ incremental: false
 highlighter: rouge
 gist:
   noscript: false
+  
+# Jekyll 3 now only supports Kramdown for Markdown
 kramdown:
-  input: GFM
-  math_engine: mathjax
-  syntax_highlighter: rouge
+    math_engine: mathjax
+    # Use GitHub flavored markdown, including triple backtick fenced code blocks
+    input: GFM
+    # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
+    syntax_highlighter: rouge
+    syntax_highlighter_opts:
+    # Use existing pygments syntax highlighting css
+    css_class: 'highlight'
 
 
 theme: "minima"
