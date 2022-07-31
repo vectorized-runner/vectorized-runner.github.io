@@ -351,7 +351,123 @@ void AddToList(ref StackOnlyList<int> list)
 }
 ```
 
-Rest of the implementation is ordinary. Also I didn't provide the whole IList interface, but you can extend it yourself! You can get the full source code from here: [StackOnlyList](https://github.com/vectorized-runner/StackOnlyList/blob/main/StackOnlyList/StackOnlyList.cs)
+Rest of the implementation is ordinary. Also I didn't provide the whole IList interface, but you can extend it yourself! 
+
+# A Simple Benchmark
+
+Just want to show you some idea of memory usage difference, not a very smart case for benchmark:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Diagnosers;
+
+namespace StackOnlyList
+{
+	[ShortRunJob]
+	[MemoryDiagnoser]
+	[HardwareCounters(HardwareCounter.CacheMisses, HardwareCounter.BranchMispredictions, HardwareCounter.InstructionRetired)]
+	[SkipLocalsInit]
+	public class Benchmarks_VersusList
+	{
+		int[] CopyArray;
+		int Min = 0;
+		int Max = 1000;
+		int ArrayCount = 16;
+		int IterationCount = 1_000_000;
+
+		public Benchmarks_VersusList()
+		{
+			var random = new Random(0);
+
+			CopyArray = new int[ArrayCount];
+			for(int i = 0; i < ArrayCount; i++)
+			{
+				CopyArray[i] = random.Next(Min, Max);
+			}
+		}
+
+		[Benchmark(Baseline = true)]
+		public int StackOnlyListSum()
+		{
+			var sum = 0;
+
+			for(int i = 0; i < IterationCount; i++)
+			{
+				sum += StackOnlyListSumOnce();
+			}
+
+			return sum;
+		}
+
+		int StackOnlyListSumOnce()
+		{
+			using var list = new StackOnlyList<int>(stackalloc int[ArrayCount]);
+
+			for(int i = 0; i < ArrayCount; i++)
+			{
+				list.Add(CopyArray[i]);
+			}
+
+			var sum = 0;
+
+			for(int i = 0; i < list.Count; i++)
+			{
+				sum += list[i];
+			}
+
+			return sum;
+		}
+
+		[Benchmark]
+		public int DefaultListSum()
+		{
+			var sum = 0;
+
+			for(int i = 0; i < IterationCount; i++)
+			{
+				sum += DefaultListSumOnce();
+			}
+
+			return sum;
+		}
+
+		int DefaultListSumOnce()
+		{
+			var list = new List<int>(ArrayCount);
+
+			for(int i = 0; i < ArrayCount; i++)
+			{
+				list.Add(CopyArray[i]);
+			}
+
+			var sum = 0;
+
+			for(int i = 0; i < list.Count; i++)
+			{
+				sum += list[i];
+			}
+
+			return sum;
+		}
+	}
+}
+```
+
+Here are the results:
+
+| Method           |     Mean |    Error |   StdDev | Ratio | InstructionRetired/Op | CacheMisses/Op | BranchMispredictions/Op |      Gen 0 |     Allocated |
+| ---------------- | -------: | -------: | -------: | ----: | --------------------: | -------------: | ----------------------: | ---------: | ------------: |
+| StackOnlyListSum | 52.29 ms | 4.327 ms | 0.237 ms |  1.00 |           811,433,333 |         23,074 |                  40,004 |          - |             - |
+| DefaultListSum   | 56.28 ms | 7.765 ms | 0.426 ms |  1.08 |           583,222,222 |        525,805 |                  67,508 | 25444.4444 | 120,000,000 B |
+
+As you can see, 120,000,000 bytes compared to 0 bytes.
+
+Notice that I've used [SkipLocalsInit Attribute](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.skiplocalsinitattribute?view=net-6.0) on the Benchmark class, which removes instructions for setting local variables to their default value. It's an extra optimization when using stackalloc.
+
+Side note: The default List could beat my implementation in CPU performance in many cases, since I didn't over-optimize it.
 
 # Summary
 
@@ -360,6 +476,8 @@ Rest of the implementation is ordinary. Also I didn't provide the whole IList in
 - There are some cases when the user needs to be careful: Working with stack allocated memory, passing to methods, using ref returns.
 
 
+
+You can get the full source code from here: [StackOnlyList](https://github.com/vectorized-runner/StackOnlyList/blob/main/StackOnlyList/StackOnlyList.cs)
 
 Please give some feedback (wherever I shared this!) as I don't have comments implemented here *yet*!
 
