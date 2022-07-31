@@ -262,7 +262,7 @@ void RefReturnExample()
     // ... Assume some list.Add done here
 
     // A 4x4 matrix has 16 float fields, total of 64 bytes, we don't want to copy it!
-	ref var matrix = ref list[0];
+    ref var matrix = ref list[0];
     // You can also have read-only reference
     ref readonly var readonlyMatrix = ref list[0];
     
@@ -339,7 +339,7 @@ Now, we have one last important thing to remember: **We always need to pass the 
 ```csharp
 void IncorrectListUsage()
 {
-	var list = new StackOnlyList<int>();
+    var list = new StackOnlyList<int>();
     // list.Count is zero here
     AddToList(list);
     // list.Count is still zero here, since structs are copied when passed to function!
