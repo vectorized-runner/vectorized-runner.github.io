@@ -9,7 +9,7 @@ email: "bartubas99@gmail.com"
 github_username: "vectorized-runner"
 linkedin_username: "bartubas"
 gitlab_username: "vectorized_runner"
-markdown: kramdown
+
 #facebook_username: username
 #flickr_username: username
 #instagram_username: username
@@ -42,3 +42,5 @@ defaults:
       type: post
     values:
       tags: Other
+
+markdown: kramdown
