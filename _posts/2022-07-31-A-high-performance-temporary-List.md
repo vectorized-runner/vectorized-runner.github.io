@@ -30,7 +30,7 @@ public ref struct StackOnlyList<T> where T : IEquatable<T>
 }
 ```
 
-The list is a [ref struct]( **https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct#ref-struct**), which allows us to store stack allocated memory, which will be assigned to the [Span](https://docs.microsoft.com/en-us/dotnet/api/system.span-1?view=net-6.0) field. Ref structs can't escape to the managed heap. For example, you can't cache it on a class field. It's good for our implementation, since our list is only meant to be used for temp memory.
+The list is a [ref struct]( https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct#ref-struct), which allows us to store stack allocated memory, which will be assigned to the [Span](https://docs.microsoft.com/en-us/dotnet/api/system.span-1?view=net-6.0) field. Ref structs can't escape to the managed heap. For example, you can't cache it on a class field. It's good for our implementation, since our list is only meant to be used for temp memory.
 
 `ArrayFromPool` field is to store arrays returned from the shared memory, we'll eventually return the array so we keep a reference to it.
 
