@@ -59,13 +59,15 @@ var list = new StackOnlyList<int>(stackalloc int[32]);
 You need to be **very careful** when using this constructor though:
 
 ```cs
-// This method may crash your program depending on the 'size' parameter and the size of the generic type T. If the size is a parameter you shouldn't use this constructor!
+// This method may crash your program depending on the 'size' parameter and 
+// the size of the generic type T. If the size is a parameter you shouldn't use this constructor!
 void PotentiallyDangerousMethod(int size)
 {
     var list = new StackOnlyList<int>(stackalloc int[size]);
 }
 
-// Calling this method will throw StackOverflowException, but you can't even catch it (with a try/catch block), it's going to crash your program!
+// Calling this method will throw StackOverflowException, but you can't even catch it 
+// (with a try/catch block), it's going to crash your program!
 void DefinitelyDangerousMethod()
 {
     for(int i = 0; i < 100_000; i++)
@@ -74,7 +76,8 @@ void DefinitelyDangerousMethod()
     }
 }
 
-// This method is safe, as each call to TempList will release the stackalloc memory before the next one is called.  
+// This method is safe, as each call to TempList will release the stackalloc memory 
+// before the next one is called.  
 void SafeMethod()
 {
     for(int i = 0; i < 100_000; i++)
@@ -154,11 +157,11 @@ public void ListExample()
 {
     // Notice we're not using stackalloc constructor anymore.
     using var listWithAutoDispose = new StackOnlyList<int>(32);
- 	// Do some operations... and it's auto disposed!
+    // Do some operations... and it's auto disposed!
     
     // You need to manually dispose this!
     var listWithManualDispose = new StackOnlyList<int>(32);
-	// Do some operations...
+    // Do some operations...
     listWithManualDispose.Dispose();
 }
 ```
@@ -263,7 +266,7 @@ void RefReturnExample()
     // You can also have read-only reference
     ref readonly var readonlyMatrix = ref list[0];
     
-  	// We can also copy it, but the performance gains are gone!
+    // We can also copy it, but the performance gains are gone!
     var matrix = list[0];
 }
 ```
@@ -339,8 +342,8 @@ void IncorrectListUsage()
 	var list = new StackOnlyList<int>();
     // list.Count is zero here
     AddToList(list);
-    // list.Count is still zero here, since structs are value types they are copied when passed to function!
-	// You also failed to Dispose the memory here, since on our local struct no field has changed.
+    // list.Count is still zero here, since structs are copied when passed to function!
+    // You also failed to Dispose the memory here, since on our local struct no field has changed.
     list.Dispose();
 }
 
@@ -366,7 +369,7 @@ Rest of the implementation is ordinary. Also I didn't provide the whole IList in
 
 # Summary
 
-- The StackOnlyList is a replacement for default C# List for high performance use, when we require temporary memory.
+- The StackOnlyList is a replacement for default C# List when we need temp memory in high performance use scenarios.
 
 - There are some cases when the user needs to be careful: Working with stack allocated memory, passing to methods, using ref returns.
 
