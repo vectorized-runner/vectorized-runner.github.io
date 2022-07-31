@@ -43,4 +43,4 @@ defaults:
     values:
       tags: Other
 
-markdown: kramdown
+markdown: GFM
