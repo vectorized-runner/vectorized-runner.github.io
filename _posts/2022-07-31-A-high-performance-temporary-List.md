@@ -10,10 +10,10 @@ I'm assuming the reader knows how List data structure works internally, just an 
 
 Here's the aim of StackOnlyList:
 
-1. Allow using stack allocated memory as an initial memory
-2. Fallback to pooled memory if the list needs to grow or the stack memory is not available
-3. Should be simple to use and hard to misuse
-4. Use most recent C# features for performance
+1. Allows using stack allocated memory as an initial memory.
+2. Fallbacks to pooled memory if the list needs to grow or the stack memory is not available.
+3. Should be simple to use and hard to misuse.
+4. Uses most recent C# features for performance.
 
 Let's start with the signature and fields of our list:
 
