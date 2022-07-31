@@ -216,22 +216,6 @@ If the current capacity is zero, it's a simpler path. If capacity is greater tha
 
 Also we're passing the parameter with [in](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/in-parameter-modifier) keyword, which passes the argument as read-only reference. This is another optimization for working with big structs, we don't want them copied.
 
-{% highlight csharp %}
-
-public ref T this[int index]
-{
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    get
-    {
-        CheckIndexGreaterOrEqualToCountAndThrow(index);
-        return ref Span[index];
-    }
-}
-
-{% endhighlight %}
-
-
-
 See indexing to our list:
 
 ```cs
