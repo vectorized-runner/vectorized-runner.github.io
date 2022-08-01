@@ -325,7 +325,7 @@ void IncorrectListUsage()
 {
     var list = new StackOnlyList<int>();
     // list.Count is zero here
-    AddToList(list);
+    AddToListIncorrectly(list);
     // list.Count is still zero here, since structs are copied when passed to function!
     // You also failed to Dispose the memory here, since on our local struct no field has changed.
     list.Dispose();
