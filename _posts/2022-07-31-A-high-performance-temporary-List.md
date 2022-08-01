@@ -307,7 +307,7 @@ public Span<T>.Enumerator GetEnumerator()
 }
 ```
 
-I used `AggressiveInlining` in many of my methods. I didn't benchmark it, but assuming for very small methods it's better to inline. There's some good information about inlining in this post: [To Inline or not to inline](https://docs.microsoft.com/en-us/archive/blogs/vancem/to-inline-or-not-to-inline-that-is-the-question) 
+I used `AggressiveInlining` in many of my methods. I didn't benchmark extensively, but for very small methods it's better to inline. There's some good information about inlining in this post: [To Inline or not to inline](https://docs.microsoft.com/en-us/archive/blogs/vancem/to-inline-or-not-to-inline-that-is-the-question) 
 
 Span-related methods are very important for preventing memory copying. `Span<T>.GetEnumerator` allows you to use very sweet syntax:
 
