@@ -111,10 +111,10 @@ public StackOnlyList(int initialCapacity = 0)
 		}
 		case 0:
 		{
-            ArrayFromPool = null;
-            Span = Span<T>.Empty;
-            Count = 0;
-            break;
+			ArrayFromPool = null;
+			Span = Span<T>.Empty;
+			Count = 0;
+			break;
 		}
 		case > 0:
 		{
