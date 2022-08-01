@@ -141,6 +141,10 @@ public void Dispose()
 {
     var toReturn = ArrayFromPool;
 
+    // Prevent using existing data, if this struct is erroneously used after it is disposed.
+    // This can be commented out for extra performance.
+    // this = default;
+
     if(toReturn != null)
     {
         ArrayFromPool = null;
