@@ -180,15 +180,16 @@ public void Add(in T item)
 {
     if(Capacity == Count)
     {
-        var desiredCapacity = Capacity == 0 ? 4 : 2 * Capacity;
-        Grow(desiredCapacity);
+        Grow();
     }
 
     Span[Count++] = item;
 }
 
-void Grow(int desiredCapacity)
+void Grow()
 {
+    var desiredCapacity = Capacity == 0 ? 4 : 2 * Capacity;
+    
     if(Capacity == 0)
     {
         var newArray = ArrayPool<T>.Shared.Rent(desiredCapacity);
