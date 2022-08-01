@@ -23,8 +23,13 @@ public ref struct StackOnlyList<T> where T : IEquatable<T>
     // These fields are internal because they are used in unit tests
     internal Span<T> Span;
     internal T[] ArrayFromPool;
-    public int Capacity { get; private set; }
     public int Count { get; private set; }
+    
+    public int Capacity
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => Span.Length;
+    }
 
     ...
 }
@@ -43,7 +48,6 @@ public StackOnlyList(Span<T> initialBuffer)
 {
     ArrayFromPool = null;
     Span = initialBuffer;
-    Capacity = initialBuffer.Length;
     Count = 0;
 }
 ```
@@ -107,17 +111,15 @@ public StackOnlyList(int initialCapacity = 0)
 		}
 		case 0:
 		{
-			ArrayFromPool = null;
-			Span = null;
-			Capacity = 0;
-			Count = 0;
+            ArrayFromPool = null;
+            Span = Span<T>.Empty;
+            Count = 0;
 			break;
 		}
 		case > 0:
 		{
 			ArrayFromPool = ArrayPool<T>.Shared.Rent(initialCapacity);
 			Span = ArrayFromPool;
-			Capacity = ArrayFromPool.Length;
 			Count = 0;
 			break;
 		}
@@ -192,7 +194,6 @@ void Grow(int desiredCapacity)
         var newArray = ArrayPool<T>.Shared.Rent(desiredCapacity);
         ArrayFromPool = newArray;
         Span = newArray;
-        Capacity = newArray.Length;
     }
     else
     {
@@ -208,7 +209,6 @@ void Grow(int desiredCapacity)
         }
 
         ArrayFromPool = newArray;
-        Capacity = newArray.Length;
     }
 }
 ```
