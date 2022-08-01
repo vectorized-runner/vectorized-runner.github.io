@@ -176,6 +176,7 @@ We're using [using declarations](https://docs.microsoft.com/en-us/dotnet/csharp/
 Let's see the Add method:
 
 ```csharp
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
 public void Add(in T item)
 {
     if(Capacity == Count)
@@ -186,6 +187,8 @@ public void Add(in T item)
     Span[Count++] = item;
 }
 
+// We don't want to inline the rare path
+[MethodImpl(MethodImplOptions.NoInlining)]
 void Grow()
 {
     var desiredCapacity = Capacity == 0 ? 4 : 2 * Capacity;
