@@ -136,16 +136,14 @@ Also, we will never use the ```ArrayFromPool``` field for accessing elements, al
 We need to return this memory after we're done with it, so let's add a dispose method:
 
 ```csharp
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
 public void Dispose()
 {
     var toReturn = ArrayFromPool;
 
-    // Prevent using existing data, if this struct is erroneously used after it is disposed.
-    // This can be commented out for extra performance.
-    this = default;
-
     if(toReturn != null)
     {
+        ArrayFromPool = null;
         ArrayPool<T>.Shared.Return(toReturn);
     }
 }
