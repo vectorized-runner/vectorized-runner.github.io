@@ -25,5 +25,5 @@ void AddWindowHints(){
 
 I wanted to remember the whole OpenGL pipeline, so I've started writing the code from scratch, instead of copy-pasting code from 477 homeworks, as I knew I'd hit a barrier and not knowing the context would block me later. It took me a lot of commits and I've managed to render my first rectangle with shared indices.
 
-![FirstRect]([vectorized-runner.github.io](https://github.com/vectorized-runner/vectorized-runner.github.io))
+![FirstRect](vectorized-runner.github.io/assets/rect.png)
 
