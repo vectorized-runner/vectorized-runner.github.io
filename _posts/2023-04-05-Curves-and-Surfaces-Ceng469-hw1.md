@@ -29,7 +29,7 @@ I wanted to remember the whole OpenGL pipeline, so I've started writing the code
 
 <img src="{{site.url}}/images/rect.png" style="display: block; margin: auto;" />
 
-
+xx
 
 
 
