@@ -27,7 +27,11 @@ I wanted to remember the whole OpenGL pipeline, so I've started writing the code
 
 // TODO: Make the image work here
 
-![Xd](https://github.com/vectorized-runner/vectorized-runner.github.io/blob/main/docs/assets/rect.png)
+![Xd](/Users/bartubas/Homeworks/vectorized-runner.github.io/docs/assets/rect.png)
+
+
+
+
 
 
 
