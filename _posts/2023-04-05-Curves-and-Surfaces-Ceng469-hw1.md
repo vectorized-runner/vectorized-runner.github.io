@@ -2,6 +2,8 @@ This homework has been a quite ride for me. It took me so long to actually rende
 
 # Challenges and Solutions
 
+
+
 ## Running on Mac
 
 Initially I couldn't get OpenGL version 460 running on my Mac. I thought it was mandatory to run on 460, but then I learned that's not the case, but the major version should be 4. I got my window hints right on Mac with this code:
@@ -220,7 +222,9 @@ The surface looked like this:
 2. As I decreased the SampleCount, my curve would get smaller on Linux, while it was fine on Mac. This turned out to be an issue with ```pow``` function. I've implemented the integer version of ```pow``` myself. 
 3. ```glm::lerp``` was giving compile errors for some reason. I've embedded my own code for this as well.
 
-### Conclusion
+
+
+# Conclusion
 
 I've learned a lot in this homework, however, some parts were really frustrating, such as input files potentially including multiple bezier curves, that took a lot of time to handle and I think wasn't contributing much to actually learning about the surfaces.
 
