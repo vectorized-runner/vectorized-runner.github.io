@@ -120,4 +120,4 @@ void main()
 
 and here's the output:
 
-<img src="{{site.url}}/images/initial-grid.png" width = "400" height = "400" style="display: block; margin: auto;" />
+<img src="{{site.url}}/images/initial-curve.png" width = "400" height = "400" style="display: block; margin: auto;" />
