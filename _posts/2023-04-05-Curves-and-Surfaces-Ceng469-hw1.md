@@ -4,7 +4,7 @@ This homework has been a quite ride for me. It took me so long to actually rende
 
 ## Running on Mac
 
-Initially I couldn't get OpenGL version 460 running on my Mac. I thought it was mandatory to run on 460, but then I learned that's not the case, but the major version should be 4. I got my window hints right on Mac with this:
+Initially I couldn't get OpenGL version 460 running on my Mac. I thought it was mandatory to run on 460, but then I learned that's not the case, but the major version should be 4. I got my window hints right on Mac with this code:
 
 ```c++
 void AddWindowHints(){
@@ -25,11 +25,11 @@ void AddWindowHints(){
 
 I wanted to remember the whole OpenGL pipeline, so I've started writing the code from scratch, instead of copy-pasting code from 477 homeworks, as I knew I'd hit a barrier and not knowing the context would block me later. It took me a lot of commits but I've managed to render my first rectangle with shared indices.
 
-// TODO: Make the image work here
+// TODO: Decrease image size
 
-<img src="{{site.url}}/images/rect.png" style="display: block; margin: auto;" />
+<img src="{{site.url}}/images/rect.png" width = "200" height = "200" style="display: block; margin: auto;" />
 
-xx
+
 
 
 
