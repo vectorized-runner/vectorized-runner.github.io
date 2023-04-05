@@ -1,6 +1,6 @@
 This homework has been a quite ride for me. It took me so long to actually render a triangle on the surface I was almost quite giving up :) But once I've seen something on the screen with the correct transformations rendered I've got enough courage to pull it off.
 
-# Challenges
+# Challenges and Solutions
 
 ## Running on Mac
 
@@ -23,7 +23,8 @@ void AddWindowHints(){
 
  ## Drawing the First Triangle
 
-I wanted to remember the whole OpenGL pipeline, so I've started writing the code from scratch, instead of copy-pasting code from 477 homeworks, as I knew I'd hit a barrier and not knowing the context would block me later. It took me a lot of commits and I've managed to render my first rectangle with shared indices.
+I wanted to remember the whole OpenGL pipeline, so I've started writing the code from scratch, instead of copy-pasting code from 477 homeworks, as I knew I'd hit a barrier and not knowing the context would block me later. It took me a lot of commits but I've managed to render my first rectangle with shared indices.
 
-![FirstRect](vectorized-runner.github.io/assets/rect.png)
+// TODO: Make the image work here
 
+![Xd](vectorized-runner.github.io/docs/assets/logo.png)
