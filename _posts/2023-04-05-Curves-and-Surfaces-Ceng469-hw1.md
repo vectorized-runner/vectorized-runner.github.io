@@ -79,4 +79,8 @@ void UpdateMesh(){
 }
 ```
 
-<img src="{{site.url}}/images/initial_grid.png" width = "400" height = "400" style="display: block; margin: auto;" />
+<img src="{{site.url}}/images/initial-grid.png" width = "400" height = "400" style="display: block; margin: auto;" />
+
+## Generating the input1.txt
+
+I wanted to just hardcode everything and get the curve on input1.txt working, without dealing with file parsing, so I've hardcoded the values, and spent time on how to design the data for shaders instead.
