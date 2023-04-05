@@ -220,3 +220,10 @@ The surface looked like this:
 2. As I decreased the SampleCount, my curve would get smaller on Linux, while it was fine on Mac. This turned out to be an issue with ```pow``` function. I've implemented the integer version of ```pow``` myself. 
 3. ```glm::lerp``` was giving compile errors for some reason. I've embedded my own code for this as well.
 
+# Conclusion
+
+I've learned a lot in this homework, however, some parts were really frustrating, such as input files potentially including multiple bezier curves, that took a lot of time to handle and I think wasn't contributing much to actually learning about the surfaces.
+
+Here's a final render:
+
+<img src="{{site.url}}/images/final-render.png" width = "400" height = "400" style="display: block; margin: auto;" />
