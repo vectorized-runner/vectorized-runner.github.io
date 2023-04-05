@@ -150,3 +150,73 @@ float sampleHeightOnCurve(vec3 stc){
     return result;
 }
 ```
+
+I also needed to locally-calculate s, t of the surfaces, as per surface it needs to go in the [0, 1] range:
+
+```c++
+    for(int ix = 0; ix < sampleCount; ix++){
+        for(int iz = 0; iz < sampleCount; iz++){
+            auto curveIndexX = ix / (sampleCount / curveCountX);
+            auto curveIndexZ = iz / (sampleCount / curveCountZ);
+            auto curveIndex = curveIndexZ * curveCountX + curveIndexX;
+            
+            cout << "CurveIndex for  " << ix << ", " << iz << " is " << curveIndex << endl;
+            
+            auto index = sampleCount * iz + ix;
+            auto tX = ix / (float)(sampleCount - 1);
+            auto posX = lerp(minX, maxX, tX);
+
+            // This is overridden
+            auto posY = 0.0f;
+
+            auto tZ = iz / (float)(sampleCount - 1);
+            auto posZ = lerp(minZ, maxZ, tZ);
+            
+            auto point = vec3(posX, posY, posZ);
+            
+            auto tileZ = (float)(sampleCount - 1) / curveCountZ;
+            auto s = fmod(iz, tileZ) / tileZ;
+            
+            auto tileX = (float)(sampleCount - 1) / curveCountX;
+            auto t = fmod(ix, tileX) / tileX;
+                                                     
+            DebugAssert(s >= 0.0f && s <= 1.0f, "SRange");
+            DebugAssert(t >= 0.0f && t <= 1.0f, "TRange");
+            
+            auto stc = vec3(s, t, curveIndex);
+            
+            vertices[index] = VertexData(point, stc);
+        }
+    }
+```
+
+## Hitting the OpenGL uniform Limit
+
+I've set up my data in **Structure of Arrays** fashion:
+
+```c++
+uniform float curveHeights[16 * 36];
+uniform float curvePositionX[16 * 36];
+uniform float curvePositionZ[16 * 36];
+```
+
+Then my shader wouldn't compile, it said the code has hit the uniform limit. Just merging into one struct worked out in the end:
+
+```c++
+uniform vec3 curvePositions[16 * 36];
+```
+
+## A small error in the Surface Normal, losing my mind for a day
+
+I've had an error with the partial derivatives where I've used ```s * s``` instead of ```-s * s```, which took a lot of hair pulling to find out. 
+
+The surface looked like this:
+
+<img src="{{site.url}}/images/broken-normals.png" width = "400" height = "400" style="display: block; margin: auto;" />
+
+## Honorable Mentions: Getting it working on Ineks
+
+1. GLFW_KEY_SPACE wouldn't work on Inek (I used this for wireframe toggle).
+2. As I decreased the SampleCount, my curve would get smaller on Linux, while it was fine on Mac. This turned out to be an issue with ```pow``` function. I've implemented the integer version of ```pow``` myself. 
+3. ```glm::lerp``` was giving compile errors for some reason. I've embedded my own code for this as well.
+
