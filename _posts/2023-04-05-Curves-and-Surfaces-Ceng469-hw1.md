@@ -83,4 +83,41 @@ void UpdateMesh(){
 
 ## Generating the input1.txt
 
-I wanted to just hardcode everything and get the curve on input1.txt working, without dealing with file parsing, so I've hardcoded the values, and spent time on how to design the data for shaders instead.
+I wanted to just hardcode everything and get the curve on input1.txt working, without dealing with file parsing, so I've hardcoded the values, and spent time on how to design the data for shaders instead. Also I'm skipping normals at this point.
+
+```c++
+uniform float[16] curveHeights;
+uniform float s;
+uniform float t;
+...
+  
+float sampleHeightOnCurve(float s, float t){
+    float result = 0.0f;
+    
+    for (int i = 0; i <= 3; i++)
+    for (int j = 0; j <= 3; j++)
+    {
+        float height = curveHeights[i * 3 + j];
+        result += height * bernstein(3, i, s) * bernstein(3, j, t);
+    }
+
+    return result;
+}
+
+void main()
+{
+    float height = sampleHeightOnCurve(s, t);
+    vec3 finalVertex = vec3(inVertex.x, height, inVertex.z) * coordsMultiplier;
+    gl_Position = projection * view * model * vec4(finalVertex, 1);
+    
+    // TODO: Remove this
+    ourColor = vec3(0, 1, 0);
+
+    // TODO:
+    normal = sampleNormalOnCurve(s, t);
+}
+```
+
+and here's the output:
+
+<img src="{{site.url}}/images/initial-grid.png" width = "400" height = "400" style="display: block; margin: auto;" />
