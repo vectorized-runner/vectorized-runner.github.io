@@ -121,3 +121,32 @@ void main()
 and here's the output:
 
 <img src="{{site.url}}/images/initial-curve.png" width = "400" height = "400" style="display: block; margin: auto;" />
+
+## Designing for the actual Input Files
+
+So I've needed to setup my data for potentially 36 curves. My initial thought was to just allocate whole memory up front. It turned out to be a good decision. I've done this on the CPU side as well.
+
+Also I needed to pass the CurveIndex to the Vertex shader so that the vertex would know which index to sample from.
+
+```c++
+uniform float curveHeights[16 * 36];
+
+layout (location = 0) in vec3 inVertex;   // the position variable has attribute position 0
+layout (location = 1) in vec3 stc; // the s, t, curve index
+
+float sampleHeightOnCurve(vec3 stc){
+    float s = stc.x;
+    float t = stc.y;
+    int curveIndex = int(stc.z);
+    float result = 0.0f;
+    
+    for (int cx = 0; cx < 4; cx++)
+    for (int cz = 0; cz < 4; cz++)
+    {
+        float height = curveHeights[curveIndex * 16 + cx * 4 + cz];
+        result += height * bernstein(3, cx, s) * bernstein(3, cz, t);
+    }
+
+    return result;
+}
+```
