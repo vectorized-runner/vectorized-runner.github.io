@@ -19,7 +19,7 @@ void AddWindowHints(){
 }
 ```
 
- ## Drawing the First Triangle
+## Drawing the First Triangle
 
 I wanted to remember the whole OpenGL pipeline, so I've started writing the code from scratch, instead of copy-pasting code from 477 homeworks, as I knew I'd hit a barrier and not knowing the context would block me later. It took me a lot of commits but I've managed to render my first rectangle with shared indices.
 
