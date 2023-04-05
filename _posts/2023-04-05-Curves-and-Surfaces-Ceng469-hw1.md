@@ -27,7 +27,9 @@ I wanted to remember the whole OpenGL pipeline, so I've started writing the code
 
 // TODO: Make the image work here
 
-![Xd](./assets/rect.png)
+<img src="{{site.url}}/images/rect.png" style="display: block; margin: auto;" />
+
+
 
 
 
