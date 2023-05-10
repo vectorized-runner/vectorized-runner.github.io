@@ -188,21 +188,24 @@ void UpdateCarPosition(){
     auto& tf = car.obj.transform;
     
     DebugAssert(IsLengthEqual(tf.Forward(), 1.0f), "CarVelocity");
+    auto deltaSpeed = 0.0f;
     
     if(input.move != 0){
         auto carAccel = Car::InputAcceleration * input.move;
-        auto deltaSpeed = carAccel * gameTime.deltaTime;
+        deltaSpeed = carAccel * gameTime.deltaTime;
         car.speed += deltaSpeed;
     }
     else{
         auto direction = car.speed > 0.0f ? -1 : 1;
         auto carAccel = Car::Deceleration * direction;
-        auto deltaSpeed = carAccel * gameTime.deltaTime;
+        deltaSpeed = carAccel * gameTime.deltaTime;
         if(abs(deltaSpeed) > abs(car.speed)){
              deltaSpeed = -car.speed;
         }
+        
     }
-    
+  
+    car.speed += deltaSpeed;
     auto carVelocity = tf.Forward() * car.speed;
     tf.position += carVelocity * gameTime.deltaTime;
 }
