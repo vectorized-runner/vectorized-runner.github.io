@@ -327,4 +327,4 @@ Also there are some weird artifacts on statues while moving the car.
 
 This homework taught me a lot, especially using Depth and Frame buffers and putting it into practice was nice.
 
-If I had more time I'd like to play around with different models and maybe make this a complete game, maybe later :)
+If I had more time I'd like to play around with different models and make this a complete game, maybe later :)
