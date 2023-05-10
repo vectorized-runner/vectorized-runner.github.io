@@ -315,11 +315,11 @@ I'm pretty sure my dynamic cubemap calculations are incorrect, but I couldn't fi
 
 Also there are some weird artifacts on statues while moving the car.
 
-<img src="{{site.url}}/images/hw2-img1.png" width = "400" height = "400" style="display: block; margin: auto;" />
+<img src="{{site.url}}/images/hw2-img1.png" width = "800" height = "600" style="display: block; margin: auto;" />
 
-<img src="{{site.url}}/images/hw2-img2.png" width = "400" height = "400" style="display: block; margin: auto;" />
+<img src="{{site.url}}/images/hw2-img2.png" width = "800" height = "600" style="display: block; margin: auto;" />
 
-<img src="{{site.url}}/images/hw2-img3.png" width = "400" height = "400" style="display: block; margin: auto;" />
+<img src="{{site.url}}/images/hw2-img3.png" width = "800" height = "600" style="display: block; margin: auto;" />
 
 
 
