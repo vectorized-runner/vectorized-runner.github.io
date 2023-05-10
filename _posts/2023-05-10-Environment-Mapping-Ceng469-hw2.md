@@ -27,7 +27,7 @@ struct Mesh {
 };
 ```
 
-I've added a method to easily draw any mesh:
+I've added a method to easily draw any mesh (implementation not included, as it's not important for this homework):
 
 ```c++
 void DrawMesh(const mat4& projectionMatrix, const mat4& viewingMatrix, const mat4& modelingMatrix, const Mesh& mesh);
@@ -65,6 +65,52 @@ struct Transform{
     }
 };
 ```
+
+### Object
+
+The object is used to make an hierarchy of multiple meshes. For example, we can think of the ***Car*** as an object with of body, window and tire meshes.
+
+```c++
+struct Object {
+    Transform transform;
+    vector<Mesh> meshes;
+};
+```
+
+Then, we can embed this object into our commonly-used shapes:
+
+```c++
+struct Ground {
+    Object obj;
+};
+
+struct Statue{
+    Object obj;
+};
+
+struct Car {
+    float speed = 0.0f;
+    
+    Object obj;
+    
+    static constexpr float InputAcceleration = 25.0f;
+    static constexpr float Deceleration = 10.0f;
+};
+```
+
+We can draw an object easily now:
+
+```c++
+void DrawObject(const mat4& projectionMatrix, const mat4& viewingMatrix, const Object& obj) {
+    const auto modelingMatrix = obj.transform.GetMatrix();
+    
+    for(int i = 0; i < obj.meshes.size(); i++){
+        DrawMesh(projectionMatrix, viewingMatrix, modelingMatrix, obj.meshes[i]);
+    }
+}
+```
+
+
 
 
 
