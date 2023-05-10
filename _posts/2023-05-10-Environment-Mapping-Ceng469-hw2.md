@@ -112,11 +112,9 @@ void DrawObject(const mat4& projectionMatrix, const mat4& viewingMatrix, const O
 
 
 
+These abstractions helped me to keep the code simple.
 
 
-TODO:
-
-TODO: 
 
 ## Update Loop
 
