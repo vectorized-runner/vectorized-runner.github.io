@@ -284,7 +284,44 @@ Then I realized it also reports **key up** actions as well. So I can handle it p
 
 Rendering meshes were trivial as their code is set up from the previous homeworks.
 
+The Render loop is pretty straightforward:
+
+```c++
+void Render(GLFWwindow* window){
+    ClearScreen();
+    
+    DrawDynamic();
+    
+    DrawSkybox();
+    
+    auto projectionMatrix = camera.GetProjectionMatrix();
+    auto viewingMatrix = camera.GetViewingMatrix();
+    DrawObject(projectionMatrix, viewingMatrix, car.obj);
+    DrawObject(projectionMatrix, viewingMatrix, armadillo.obj);
+    DrawObject(projectionMatrix, viewingMatrix, bunny.obj);
+    DrawObject(projectionMatrix, viewingMatrix, teapot.obj);
+    
+    DrawGround(projectionMatrix, viewingMatrix);
+    
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+```
+
+I'm pretty sure my dynamic cubemap calculations are incorrect, but I couldn't find what's causing it.
+
+Also there are some weird artifacts on statues while moving the car.
+
+<img src="{{site.url}}/images/hw2-img1.png" width = "400" height = "400" style="display: block; margin: auto;" />
+
+<img src="{{site.url}}/images/hw2-img2.png" width = "400" height = "400" style="display: block; margin: auto;" />
+
+<img src="{{site.url}}/images/hw2-img3.png" width = "400" height = "400" style="display: block; margin: auto;" />
 
 
 
+## Conclusion
 
+This homework taught me a lot, especially using Depth and Frame buffers and putting it into practice was nice.
+
+If I had more time I'd like to play around with different models and maybe make this a complete game, maybe later :)
