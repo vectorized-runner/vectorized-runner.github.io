@@ -27,7 +27,7 @@ struct Mesh {
 };
 ```
 
-I've added a method to easily draw any mesh (implementation not included, as it's not important for this homework):
+I've added a method to easily draw any mesh (implementation not included):
 
 ```c++
 void DrawMesh(const mat4& projectionMatrix, const mat4& viewingMatrix, const mat4& modelingMatrix, const Mesh& mesh);
@@ -208,6 +208,44 @@ void UpdateCarPosition(){
 }
 ```
 
+The Camera always looks at the Car, and depending on the input **direction** we determine its position, offset up by a little bit for better viewing experience.
+
+```c++
+void UpdateCamera(){
+    const float distance = 20.0f;
+    const float upOffset = 5.0f;
+    
+    vec3 targetPos;
+    auto carTf = car.obj.transform;
+    
+    switch(input.direction){
+        case Direction::Left:{
+            targetPos = carTf.position + carTf.Right() * distance;
+            break;
+        }
+        case Direction::Back:{
+            targetPos = carTf.position - carTf.Forward() * distance;
+            break;
+        }
+        case Direction::Front:{
+            targetPos = carTf.position + carTf.Forward() * distance;
+            break;
+        }
+        case Direction::Right:{
+            targetPos = carTf.position - carTf.Right() * distance;
+            break;
+        }
+    }
+    
+    targetPos += vec3(0, 1, 0) * upOffset;
+    
+    camera.position = targetPos;
+    camera.lookPosition = carTf.position;
+}
+```
+
+
+
 ## Input
 
 I couldn't handle input properly first, as the program loop runs at a higher frequency than the **glfwSetKeyCallback**.
@@ -239,6 +277,14 @@ Then I realized it also reports **key up** actions as well. So I can handle it p
         }
     }
 ```
+
+
+
+## Rendering
+
+Rendering meshes were trivial as their code is set up from the previous homeworks.
+
+
 
 
 
