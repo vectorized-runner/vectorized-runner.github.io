@@ -208,7 +208,37 @@ void UpdateCarPosition(){
 }
 ```
 
+## Input
 
+I couldn't handle input properly first, as the program loop runs at a higher frequency than the **glfwSetKeyCallback**.
+
+Then I realized it also reports **key up** actions as well. So I can handle it precisely if I only track press and releases, discarding the repeats.
+
+```c++
+		// ...   
+
+    if(action == GLFW_REPEAT){
+        return;
+    }
+    
+    auto isPress = action == GLFW_PRESS;
+		if(key == GLFW_KEY_W){
+        if(isPress){
+            input.move = 1;
+        }
+        else{
+            input.move = 0;
+        }
+    }
+    else if(key == GLFW_KEY_S){
+        if(isPress){
+            input.move = -1;
+        }
+        else{
+            input.move = 0;
+        }
+    }
+```
 
 
 
