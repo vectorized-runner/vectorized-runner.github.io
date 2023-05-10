@@ -110,9 +110,38 @@ void DrawObject(const mat4& projectionMatrix, const mat4& viewingMatrix, const O
 }
 ```
 
+### Camera
 
+Creating a custom component for camera helped me to wrap my head around calculations, especially when rendering cubemaps:
 
-These abstractions helped me to keep the code simple.
+```c++
+struct Screen{
+    int width = 800;
+    int height = 600;
+};
+
+struct Camera{
+    
+    vec3 position;
+    vec3 lookPosition;
+    vec3 up = vec3(0, 1, 0);
+    
+    float fovYDegrees = 45.0f;
+    float near = 0.0001f;
+    float far = 10000.0f;
+    Screen screen;
+    
+    mat4 GetViewingMatrix(){
+        return lookAt(position, lookPosition, up);
+    }
+    
+    mat4 GetProjectionMatrix(){
+        float fovYRadians = radians(fovYDegrees);
+        float aspect = screen.width / (float)screen.height;
+        return perspective(fovYRadians, aspect, near, far);
+    }
+};
+```
 
 
 
