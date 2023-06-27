@@ -179,3 +179,25 @@ void main(void)
 }
 
 ```
+
+Looks pretty similar, isn't it? The only difference is, on the Deferred shader we sample from the G-buffers, whereas on the Forward shader we get the input from the Vertex shader.
+
+# Visuals Comparison
+
+There aren't a lot of objects in the Scene, only Armadillos (enemies) and Pillars (scaled cubes) so that I can see.
+
+Forward:
+
+<img src="{{site.url}}/images/forward.png" width = "800" height = "600" style="display: block; margin: auto;" />
+
+Deferred:
+
+<img src="{{site.url}}/images/deferred.png" width = "800" height = "600" style="display: block; margin: auto;" />
+
+As you can see, except of a few artifacts, the render is nearly the same.
+
+# The Missing ground
+
+I've had the implemented a Ground mesh from the previous projects, but I couldn't fix the Deferred rendering implementation of it, here's how it looks:
+
+ 
