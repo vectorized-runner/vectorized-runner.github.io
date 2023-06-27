@@ -196,8 +196,18 @@ Deferred:
 
 As you can see, except of a few artifacts, the render is nearly the same.
 
-# The Missing ground
+# The Missing Implementation
 
-I've had the implemented a Ground mesh from the previous projects, but I couldn't fix the Deferred rendering implementation of it, here's how it looks:
+Admittedly, I haven't spent enough time on this hw, so some of the implementation is missing, you'll have to imagine it :)
 
- 
+1. The player doesn't have a gun model
+2. The enemies don't actually die when hit
+3. There's no ground, but there used to be one, but the deferred rendering implementation broke everything
+
+# A Final Note
+
+I've finished the HW while on vacation and barely had internet, had to find a cafe with a wi-fi so that I could submit the homework at the last second :)
+
+Even though this semester was really though on me, I've learned a lot in this course. Leaving the last project to us was really a treat. Thanks to Ahmet and Kadir hoca for everything.
+
+Hope to see you in another course.
