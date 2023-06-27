@@ -12,9 +12,9 @@ This technique is practical and used in commercial engines: The **Unreal Engine*
 
 # About the Project
 
-Main goal about the project was to test the performance and visuals of Forward vs. Deferred rendering, in low-high light count scenarios.
+Main goal about the project was to test the performance and visuals of Forward vs. Deferred rendering, in both low and high light count scenarios.
 
-Since I'm a game developer, I thought to myself why not make it a game 
+I've also wanted to implement it as a game: A simple first-person shooter, where you can move with a character. But there's a twist: The Player throws lights out of his gun.
 
 
 
