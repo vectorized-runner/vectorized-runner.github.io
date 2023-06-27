@@ -198,7 +198,19 @@ As you can see, except of a few artifacts, the render is nearly the same.
 
 # Benchmarks
 
-TODO:
+Forward rendering wins on low light counts, but Deferred rendering scales much better as I push towards 200+ lights.
+
+Here are the some average results:
+
+**Render Milliseconds: 42.699814 Mode: Forward LightCount: 30**
+
+**Render Milliseconds: 41.610718 Mode: Deferred LightCount: 30**
+
+--
+
+**Render Milliseconds: 85.006714 Mode: Forward LightCount: 251**
+
+**Render Milliseconds: 63.560486 Mode: Deferred LightCount: 251**
 
 # The Missing Implementation
 
