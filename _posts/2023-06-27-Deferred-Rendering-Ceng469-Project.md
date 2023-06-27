@@ -196,6 +196,10 @@ Deferred:
 
 As you can see, except of a few artifacts, the render is nearly the same.
 
+# Benchmarks
+
+TODO:
+
 # The Missing Implementation
 
 Admittedly, I haven't spent enough time on this hw, so some of the implementation is missing, you'll have to imagine it :)
@@ -206,8 +210,11 @@ Admittedly, I haven't spent enough time on this hw, so some of the implementatio
 
 # A Final Note
 
-I've finished the HW while on vacation and barely had internet, had to find a cafe with a wi-fi so that I could submit the homework at the last second :)
+I've finished the HW while on vacation and barely had any internet connection, had to find a cafe with a wi-fi so that I could submit the homework at the last second :)
 
 Even though this semester was really though on me, I've learned a lot in this course. Leaving the last project to us was really a treat. Thanks to Ahmet and Kadir hoca for everything.
 
-Hope to see you in another course.
+Hope to see you in another course. I think we all deserved to take a break.
+
+
+
