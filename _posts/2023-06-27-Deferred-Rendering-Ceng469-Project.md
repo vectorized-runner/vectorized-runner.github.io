@@ -230,3 +230,7 @@ Hope to see you in another course. I think we all deserved to take a break.
 
 
 
+<img src="{{site.url}}/images/final-note.jpeg" width = "800" height = "600" style="display: block; margin: auto;" />
+
+
+
