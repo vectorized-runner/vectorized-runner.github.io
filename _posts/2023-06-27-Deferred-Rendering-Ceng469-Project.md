@@ -95,4 +95,87 @@ It was hard to completely get the exact visuals for both of the Shaders.
 
 First, let me give you a quick overview of how deferred shading works:
 
-- 
+We have 2 passes:
+
+1. The *Deferred Geometry* pass, where we copy information from each object, at their fragment shader, to the *G-Buffers* (Textures).
+2. The *Deferred Light* pass, this pass is global, it's not bound to one object. Actually in order to have this pass, we just render a full screen quad (so that we can run the Shader on the full screen-space).
+
+So, the *Deferred Light* shader is the replacement of the *Forward Fragment* shader. 
+
+Here's the main() of the Deferred Light:
+
+```c++
+void main()
+{
+    // retrieve data from gbuffer
+    vec3 FragPos = texture(gPosition, TexCoords).rgb;
+    vec3 Normal = texture(gNormal, TexCoords).rgb;
+    vec3 Diffuse = texture(gAlbedoSpec, TexCoords).rgb;
+    vec3 Specular = vec3(texture(gAlbedoSpec, TexCoords).a);
+    
+    vec3 totalDiffuse = vec3(0, 0, 0);
+    vec3 totalSpecular = vec3(0, 0, 0);
+    
+    for(int i = 0; i < lightCount; ++i)
+    {
+        vec3 lightPos = lightPositions[i];
+        float dsq = distancesq(lightPos, FragPos);
+        vec3 I = lightIntensities[i] / dsq;
+        vec3 L = normalize(lightPos - FragPos);
+        vec3 V = normalize(cameraPos - FragPos);
+        vec3 H = normalize(L + V);
+        vec3 N = normalize(Normal);
+        
+        float NdotL = dot(N, L); // for diffuse component
+        float NdotH = dot(N, H); // for specular component
+
+        vec3 diffuseColor = I * Diffuse * max(0, NdotL);
+        vec3 specularColor = I * Specular * pow(max(0, NdotH), 100);
+        
+        totalDiffuse += diffuseColor;
+        totalSpecular += specularColor;
+    }
+    
+    // vec3 ambientColor = Iamb * ka;
+    vec3 ambientColor = vec3(0);
+
+    FragColor = vec4(totalDiffuse + totalSpecular + ambientColor, 1);
+}
+
+```
+
+Here's the main() of the Forward Fragment:
+
+```c++
+void main(void)
+{
+    vec3 totalDiffuse = vec3(0, 0, 0);
+    vec3 totalSpecular = vec3(0, 0, 0);
+    
+    for(int i = 0; i < lightCount; i++){
+        vec3 lightPos = lightPositions[i];
+        vec3 pos = vec3(fragWorldPos);
+        float dsq = distancesq(lightPos, pos);
+        vec3 I = lightIntensities[i] / dsq;
+        vec3 L = normalize(lightPos - pos);
+        vec3 V = normalize(cameraPos - pos);
+        vec3 H = normalize(L + V);
+        vec3 N = normalize(fragWorldNor);
+
+        float NdotL = dot(N, L); // for diffuse component
+        float NdotH = dot(N, H); // for specular component
+
+        vec3 diffuseColor = I * kd * max(0, NdotL);
+        vec3 specularColor = I * ks * pow(max(0, NdotH), 100);
+        
+        totalDiffuse += diffuseColor;
+        totalSpecular += specularColor;
+    }
+    
+    // vec3 ambientColor = Iamb * ka;
+    vec3 ambientColor = vec3(0);
+    
+    fragColor = vec4(totalDiffuse + totalSpecular + ambientColor, 1);
+}
+
+```
