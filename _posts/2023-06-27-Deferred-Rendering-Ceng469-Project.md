@@ -16,7 +16,7 @@ Main goal about the project was to test the performance and visuals of Forward v
 
 I've also wanted to implement it as a game: A simple first-person shooter, where you can move with a character. But there's a twist: The Player throws lights out of his gun.
 
-# Challenges, Implementation, Bugs
+# Implementation and the Challenges
 
 ## Creating the Benchmark Setup
 
